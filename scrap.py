@@ -4,12 +4,13 @@ Created on Mon Jun  5 10:35:59 2017
 
 @author: Alabhya
 """
-from bs4 import BeautifulSoup
-import urllib2 
-def scrappy(link,class_name):
-	url = urllib2.urlopen(link)
-	content = url.read()
-	soup = BeautifulSoup(content).find('div',class_=class_name).get_text()
-	print soup
+try:
+    from urllib2 import urlopen
+except ImportError:
+    from urllib.request import urlopen # py3k
 
-scrappy("https://www.edujinn.com/teacher-search?category_id=3&batch_city=2",'listview')
+from bs4 import BeautifulSoup # $ pip install beautifulsoup4
+
+url = "YOUR_URL_HERE"
+soup = BeautifulSoup(urlopen(url))
+print(soup.get_text())
