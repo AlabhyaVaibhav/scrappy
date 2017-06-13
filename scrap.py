@@ -8,10 +8,16 @@ try:
     from urllib2 import urlopen
 except ImportError:
     from urllib.request import urlopen # py3k
-
+import re
 from bs4 import BeautifulSoup # $ pip install beautifulsoup4
-html = 	urlopen("https://www.sulekha.com/school-tuitions/kolkata")
-bsObj	=	BeautifulSoup(html)
-nameList	=	bsObj.findAll("li",{"class":"list-item"}) 
+extractedBNList = []
+extractedPNList = []
+html = urlopen("https://www.sulekha.com/school-tuitions/kolkata")
+bsObj =	BeautifulSoup(html)
+phoneList = bsObj.findAll("span",{"class":"icon-phone"}) 
+nameList = bsObj.findAll("div",{"class":"busi-name"})
 for	name in	nameList:
-	print(name.get_text())
+	extractedBNList.append(re.sub('\s+','',name.get_text()))
+for	name in	phoneList:
+	extractedPNList.append(re.sub('\s+','',name.get_text()))
+print(extractedBNList + extractedPNList)
