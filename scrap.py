@@ -10,14 +10,10 @@ except ImportError:
     from urllib.request import urlopen # py3k
 import re
 from bs4 import BeautifulSoup # $ pip install beautifulsoup4
-extractedBNList = []
-extractedPNList = []
-html = urlopen("https://www.sulekha.com/school-tuitions/kolkata")
+STORE_LIST = []
+html = urlopen("YOUR_URL_HERE")
 bsObj =	BeautifulSoup(html)
-phoneList = bsObj.findAll("span",{"class":"icon-phone"}) 
-nameList = bsObj.findAll("div",{"class":"busi-name"})
-for	name in	nameList:
-	extractedBNList.append(re.sub('\s+','',name.get_text()))
-for	name in	phoneList:
-	extractedPNList.append(re.sub('\s+','',name.get_text()))
-print(extractedBNList + extractedPNList)
+YOUR_LIST_OF_OBJECTS = bsObj.findAll("HTML_TAG",{"class":"CLASS_NAME"}) 
+for object in YOUR_LIST_OF_OBJECTS:
+	STORE_LIST.append(re.sub('\s+','',name.get_text()))
+print(STORE_LIST)
